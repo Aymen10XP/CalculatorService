@@ -42,7 +42,26 @@ const calculatorService = {
  const result = parseFloat(args.a) / parseFloat(args.b);
  console.log(`Divide: ${args.a} / ${args.b} = ${result}`);
  return { result: result };
+ },
+
+ 
+ Modulo: function(args) {
+ if (parseFloat(args.b) === 0) {
+ throw {
+ Fault: {
+ Code: { Value: 'DIVIDE_BY_ZERO' },
+ Reason: { Text: 'Division par zéro impossible' }
  }
+ };
+ }
+ const result = parseFloat(args.a) % parseFloat(args.b);
+ console.log(`Modulo: ${args.a} % ${args.b} = ${result}`);
+ return { result: result };
+ }
+
+
+
+
  }
  }
 

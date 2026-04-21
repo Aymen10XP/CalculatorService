@@ -21,6 +21,8 @@ Object.keys(client.CalculatorService.CalculatorPort));
  // Test Division
  const divResult = await client.DivideAsync({ a: 20, b: 4 });
  console.log(`Division: 20 ÷ 4 = ${divResult[0].result}`);
+
+ 
  // Test Division par zéro (erreur)
  console.log('\n--- Test erreur: Division par zéro ---');
  try {

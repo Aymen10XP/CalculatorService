@@ -52,6 +52,12 @@
  <input message="tns:CalculatorInput"/>
  <output message="tns:CalculatorOutput"/>
  </operation>
+
+<operation name="Modulo">
+ <input message="tns:CalculatorInput"/>
+ <output message="tns:CalculatorOutput"/>
+ </operation>
+
  </portType>
  <!-- Binding -->
  <binding name="CalculatorBinding" type="tns:CalculatorPortType">
