@@ -1,5 +1,7 @@
 const soap = require('soap');
 const WSDL_URL = 'http://localhost:8000/calculator?wsdl';
+const WSDL_URL_T = 'http://localhost:8000/temperature?wsdl';
+
 async function main() {
  try {
  // Créer le client SOAP
@@ -33,6 +35,7 @@ Object.keys(client.CalculatorService.CalculatorPort));
  console.log(`Puissance: 2 ^ 3 = ${powResult[0].result}`);
 
  
+ 
 
 
 
@@ -63,5 +66,12 @@ error.root?.Envelope?.Body?.Fault?.Reason?.Text || error.message);
  } catch (error) {
  console.error('Erreur de connexion:', error.message);
  }
+
+
+
+
 }
+
 main();
+
+

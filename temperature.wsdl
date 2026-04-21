@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="TemperatureService"
+    targetNamespace="http://example.com/temperature"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:tns="http://example.com/temperature"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <types>
+        <xsd:schema targetNamespace="http://example.com/temperature">
+            <xsd:element name="TempRequest"><xsd:complexType><xsd:sequence>
+                <xsd:element name="value" type="xsd:double"/>
+            </xsd:sequence></xsd:complexType></xsd:element>
+            <xsd:element name="TempResponse"><xsd:complexType><xsd:sequence>
+                <xsd:element name="result" type="xsd:double"/>
+            </xsd:sequence></xsd:complexType></xsd:element>
+        </xsd:schema>
+    </types>
+
+    <message name="TempInput"><part name="parameters" element="tns:TempRequest"/></message>
+    <message name="TempOutput"><part name="parameters" element="tns:TempResponse"/></message>
+
+    <portType name="TemperaturePortType">
+        <operation name="CelsiusToFahrenheit"><input message="tns:TempInput"/><output message="tns:TempOutput"/></operation>
+        <operation name="FahrenheitToCelsius"><input message="tns:TempInput"/><output message="tns:TempOutput"/></operation>
+        <operation name="CelsiusToKelvin"><input message="tns:TempInput"/><output message="tns:TempOutput"/></operation>
+    </portType>
+
+    <binding name="TemperatureBinding" type="tns:TemperaturePortType">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="CelsiusToFahrenheit"><soap:operation soapAction="CelsiusToFahrenheit"/><input><soap:body use="literal"/></input><output><soap:body use="literal"/></output></operation>
+        <operation name="FahrenheitToCelsius"><soap:operation soapAction="FahrenheitToCelsius"/><input><soap:body use="literal"/></input><output><soap:body use="literal"/></output></operation>
+        <operation name="CelsiusToKelvin"><soap:operation soapAction="CelsiusToKelvin"/><input><soap:body use="literal"/></input><output><soap:body use="literal"/></output></operation>
+    </binding>
+
+    <service name="TemperatureService">
+        <port name="TemperaturePort" binding="tns:TemperatureBinding">
+            <soap:address location="http://localhost:8001/temperature"/>
+        </port>
+    </service>
+</definitions>

@@ -81,20 +81,55 @@ const calculatorService = {
  }
 
  };
+
+ const temperatureService = {
+    TemperatureService: {
+        TemperaturePort: {
+            CelsiusToFahrenheit: function(args) {
+                const f = parseFloat(args.value) * 9/5 + 32;
+                return { result: f.toFixed(2) };
+            },
+            FahrenheitToCelsius: function(args) {
+                const c = (parseFloat(args.value) - 32) * 5/9;
+                return { result: c.toFixed(2) };
+            },
+            CelsiusToKelvin: function(args) {
+                const k = parseFloat(args.value) + 273.15;
+                return { result: k.toFixed(2) };
+            }
+        }
+    }
+};
+
+
+
 // Lire le fichier WSDL
 const wsdlPath = path.join(__dirname, 'calculator.wsdl');
 const wsdl = fs.readFileSync(wsdlPath, 'utf8');
+
+
+const wsdl2 = fs.readFileSync(path.join(__dirname, 'temperature.wsdl'), 'utf8');
+
+app.listen(PORT, () => {
+    soap.listen(app, '/temperature', temperatureService, wsdl);
+    console.log(`🚀 Service de Température sur http://localhost:${PORT}/temperature?wsdl`);
+});
+
+
+/*
 // Démarrer le serveur
 app.listen(PORT, function() {
  console.log(`🚀 Serveur démarré sur http://localhost:${PORT}`);
 
  // Créer le service SOAP
- const server = soap.listen(app, '/calculator', calculatorService, wsdl);
+ //const server = soap.listen(app, '/calculator', calculatorService, wsdl);
+ const serverT = soap.listen(app, '/temperature', temperatureService, wsdl2);
 
- console.log(`🚀 WSDL disponible sur http://localhost:${PORT}/calculator?wsdl`);
+ //console.log(`🚀 WSDL Calculator disponible sur http://localhost:${PORT}/calculator?wsdl`);
+ console.log(`🚀 WSDL Temperature disponible sur http://localhost:${PORT}/temperature?wsdl`);
 
  // Log des requêtes entrantes (debug)
  server.log = function(type, data) {
  console.log(`[${type}]`, data);
  };
-});
+});*/
