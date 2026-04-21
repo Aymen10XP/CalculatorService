@@ -34,5 +34,3 @@ error.root?.Envelope?.Body?.Fault?.Reason?.Text || error.message);
  }
 }
 main();
-
-
