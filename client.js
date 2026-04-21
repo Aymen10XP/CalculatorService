@@ -22,7 +22,21 @@ Object.keys(client.CalculatorService.CalculatorPort));
  const divResult = await client.DivideAsync({ a: 20, b: 4 });
  console.log(`Division: 20 ÷ 4 = ${divResult[0].result}`);
 
+
  
+// Test Modulo
+ const modResult = await client.ModuloAsync({ a: 20, b: 15 });
+ console.log(`Modulo: 20 % 15 = ${modResult[0].result}`);
+
+// Test power
+ const powResult = await client.PowerAsync({ a: 2, b: 3 });
+ console.log(`Puissance: 2 ^ 3 = ${powResult[0].result}`);
+
+ 
+
+
+
+
  // Test Division par zéro (erreur)
  console.log('\n--- Test erreur: Division par zéro ---');
  try {
@@ -31,6 +45,21 @@ Object.keys(client.CalculatorService.CalculatorPort));
  console.log('❌ Erreur capturée:',
 error.root?.Envelope?.Body?.Fault?.Reason?.Text || error.message);
  }
+
+
+ // Test Power negative (erreur)
+ console.log('\n--- Test erreur: Power of negative numbers ---');
+ try {
+ await client.PowerAsync({ a: -2, b: -3 });
+ } catch (error) {
+ console.log('❌ Erreur capturée:',
+error.root?.Envelope?.Body?.Fault?.Reason?.Text || error.message);
+ }
+ 
+
+
+
+
  } catch (error) {
  console.error('Erreur de connexion:', error.message);
  }

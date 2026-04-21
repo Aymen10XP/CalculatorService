@@ -44,7 +44,7 @@ const calculatorService = {
  return { result: result };
  },
 
- 
+// Opération Modulo 
  Modulo: function(args) {
  if (parseFloat(args.b) === 0) {
  throw {
@@ -56,6 +56,21 @@ const calculatorService = {
  }
  const result = parseFloat(args.a) % parseFloat(args.b);
  console.log(`Modulo: ${args.a} % ${args.b} = ${result}`);
+ return { result: result };
+ },
+
+ // Opération Power
+ Power: function(args) {
+ if (parseFloat(args.b) < 0) {
+ throw {
+ Fault: {
+ Code: { Value: 'Negative power error' },
+ Reason: { Text: 'Power with negative exponent not allowed' }
+ }
+ };
+ }
+ const result = Math.pow(parseFloat(args.a), parseFloat(args.b));
+ console.log(`Power: ${args.a} ^ ${args.b} = ${result}`);
  return { result: result };
  }
 
