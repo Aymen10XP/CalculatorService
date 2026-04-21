@@ -28,18 +28,18 @@ const temperatureService = {
 // 2. Chargement du WSDL
 const wsdlPath = path.join(__dirname, 'temperature.wsdl');
 if (!fs.existsSync(wsdlPath)) {
-    console.error("❌ Erreur : Le fichier temperature.wsdl est introuvable dans le dossier !");
+    console.error(" Erreur : Le fichier temperature.wsdl est introuvable dans le dossier !");
     process.exit(1);
 }
 const wsdl = fs.readFileSync(wsdlPath, 'utf8');
 
 // 3. Démarrage du serveur
 app.listen(PORT, async () => {
-    console.log(`🚀 Serveur démarré sur http://localhost:${PORT}`);
+    console.log(` Serveur démarré sur http://localhost:${PORT}`);
     
     // Créer l'écouteur SOAP
     soap.listen(app, '/temperature', temperatureService, wsdl);
-    console.log(`📡 WSDL disponible sur http://localhost:${PORT}/temperature?wsdl`);
+    console.log(` WSDL disponible sur http://localhost:${PORT}/temperature?wsdl`);
 
     // --- 4. TEST AUTOMATIQUE (Le code du client est ici maintenant) ---
     console.log('\n--- Lancement des tests clients ---\n');
@@ -48,12 +48,12 @@ app.listen(PORT, async () => {
         const client = await soap.createClientAsync(url);
         
         const [resF] = await client.CelsiusToFahrenheitAsync({ value: 20 });
-        console.log(`✅ Test 20°C en Fahrenheit : ${resF.result}°F`);
+        console.log(` Test 20°C en Fahrenheit : ${resF.result}°F`);
 
         const [resK] = await client.CelsiusToKelvinAsync({ value: 0 });
-        console.log(`✅ Test 0°C en Kelvin : ${resK.result}K`);
+        console.log(` Test 0°C en Kelvin : ${resK.result}K`);
 
     } catch (testError) {
-        console.error("❌ Erreur lors du test client :", testError.message);
+        console.error(" Erreur lors du test client :", testError.message);
     }
 });

@@ -45,7 +45,7 @@ Object.keys(client.CalculatorService.CalculatorPort));
  try {
  await client.DivideAsync({ a: 10, b: 0 });
  } catch (error) {
- console.log('❌ Erreur capturée:',
+ console.log(' Erreur capturée:',
 error.root?.Envelope?.Body?.Fault?.Reason?.Text || error.message);
  }
 
@@ -55,7 +55,7 @@ error.root?.Envelope?.Body?.Fault?.Reason?.Text || error.message);
  try {
  await client.PowerAsync({ a: -2, b: -3 });
  } catch (error) {
- console.log('❌ Erreur capturée:',
+ console.log(' Erreur capturée:',
 error.root?.Envelope?.Body?.Fault?.Reason?.Text || error.message);
  }
  
